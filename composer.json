@@ -1,0 +1,6 @@
+{
+  "name": "raffaelwyss/tournamentmaker"
+  , "require": {
+     "phpoffice/phpspreadsheet": "^1.6"
+  }
+}

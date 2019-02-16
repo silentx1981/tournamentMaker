@@ -2,8 +2,7 @@
 
 namespace TournamentMaker;
 
-//require __DIR__."/../vendor/autoload.php";
+require __DIR__."/../vendor/autoload.php";
 
-phpinfo();
-
-echo 'Test 1';
+$app = new App();
+$app->run();

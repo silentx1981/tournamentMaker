@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>hallo</title>
+        <link rel="stylesheet" href="/tournamentMaker/public_html/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/tournamentMaker/public_html/css/tournamentMaker.css">
+    </head>
+    <body>
+
+    <div class="container">
+
+        <br>
+        <div class="alert alert-primary">
+            TournamentMaker 0.0.1
+        </div>
+
+        <div class="card container">
+
+            <form action="/tournamentMaker/public_html/" method="POST">
+                <input type="hidden" name="create" value="1">
+
+                <div class="form-group">
+                    <label>Teamname 1</label>
+                    <input type="text" class="form-control" name="team[]">
+                </div>
+
+                <div class="form-group">
+                    <label>Teamname 2</label>
+                    <input type="text" class="form-control" name="team[]">
+                </div>
+
+                <div class="form-group">
+                    <label>Teamname 3</label>
+                    <input type="text" class="form-control" name="team[]">
+                </div>
+
+                <input type="submit" class="btn btn-primary" value="Excel erstellen">
+
+            </form>
+
+        </div>
+    </div>
+
+
+    </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+        <script src="/tournamentMaker/public_html/js/bootstrap.bundle.min.js"></script>
+        <script src="/tournamentMaker/public_html/js/angular.min.js"></script>
+        <script src="/tournamentMaker/public_html/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    </body>
+</html>

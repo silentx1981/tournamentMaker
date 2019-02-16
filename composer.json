@@ -1,6 +1,17 @@
 {
   "name": "raffaelwyss/tournamentmaker"
+  , "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/silentx1981/gameplanner"
+    }
+  ]
   , "require": {
-     "phpoffice/phpspreadsheet": "^1.6"
+     "php": "^7.0"
+     ,"phpoffice/phpspreadsheet": "^1.6"
+     ,"silentx81/gameplanner": "dev-master"
+  }
+  , "autoload": {
+    "psr-4": { "TournamentMaker\\": ["src/"] }
   }
 }

@@ -10,9 +10,16 @@
 namespace TournamentMaker\Maker;
 
 
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+
 class Config
 {
-	const columnNames = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+	const columnNames = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', "I", "J", "K", "L", "M", "N", "O", "Q", "R", "S", "T", "U", "V"];
+
+	public static $align = [
+		"center" => Alignment::HORIZONTAL_CENTER
+	];
 	
 	public static function getHeaderStyle()
 	{
@@ -53,7 +60,7 @@ class Config
 		return $styleArray;
 	}
 	
-	public static function getInputStyle()
+	public static function getInputStyle($options = [])
 	{
 		$styleArray = [
 			'borders' => [
@@ -83,10 +90,10 @@ class Config
 				],
 			],
 		];
-		return $styleArray;
+		return self::addOptions($styleArray, $options);
 	}
 	
-	public static function getDefaultStyle()
+	public static function getDefaultStyle($options = [])
 	{
 		$styleArray = [
 			'borders' => [
@@ -116,7 +123,7 @@ class Config
 				],
 			],
 		];
-		return $styleArray;
+		return self::addOptions($styleArray, $options);
 	}
 	
 	public static function getPageHeaderStyle()
@@ -127,6 +134,23 @@ class Config
 				"size" => 16,
 			],
 		];
+		return $styleArray;
+	}
+
+	private static function addOptions($styleArray, $options)
+	{
+		if (isset($options['align']))
+			$styleArray['alignment']['horizontal'] = self::$align[$options['align']] ?? null;
+		if (isset($options['textRotation']))
+			$styleArray['alignment']['textRotation'] = $options['textRotation'] ?? 0;
+		if (isset($options['bgcolor'])) {
+			$styleArray['fill']['fillType'] = Fill::FILL_GRADIENT_LINEAR;
+			$styleArray['fill']['startColor']['argb'] = $options['bgcolor'];
+			$styleArray['fill']['endColor']['argb'] = $options['bgcolor'];
+		}
+		if (isset($options['bold']))
+			$styleArray['font']['bold'] = $options['bold'];
+
 		return $styleArray;
 	}
 }

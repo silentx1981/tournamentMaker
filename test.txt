@@ -1,0 +1,15 @@
+=WENN(
+      'Spiele'!$F$6>'Spiele'!$H$6;3;
+
+      WENN(
+           'Spiele'!$F$6<'Spiele'!$H$6;0;
+
+           WENN(
+                'Spiele'!$F$6='Spiele'!$H$6;1;
+
+                WENN(
+                      'Spiele'!$F$6='';'';0
+                    )
+                )
+           )
+      )

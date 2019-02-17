@@ -10,13 +10,21 @@ class ExcelHelper
 {
 	/** @var Spreadsheet */
 	protected $spreadsheet;
+
+	private $columns = [
+		"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W"
+	];
 	
 	/** @var Server */
 	protected $server;
+
+	/** @var $teams */
+	protected $teams;
 	
-	public function __construct(Server $server)
+	public function __construct(Server $server, $teams)
 	{
 		$this->server = $server;
+		$this->teams = $teams;
 	}
 	
 	public function setup()
@@ -33,5 +41,10 @@ class ExcelHelper
 		
 		$this->spreadsheet->getActiveSheet()->setCellValue($coordinates[0], $value);
 		$this->spreadsheet->getActiveSheet()->getStyle($coordinate)->applyFromArray($style);
+	}
+
+	public function getColumnByInt($int)
+	{
+		return $this->columns[$int] ?? null;
 	}
 }

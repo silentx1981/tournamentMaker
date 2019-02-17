@@ -33,7 +33,7 @@ extends ExcelHelper
 		// Mannschaften
 		$row = $row + 2;
 		$this->setCellValue("A$row:B$row", "Mannschaften", Config::getHeaderStyle());
-		$teams = $this->server->getParameter('team', []);
+		$teams = $this->teams;
 		$counter = 1;
 		foreach ($teams AS $team) {
 			$row++;

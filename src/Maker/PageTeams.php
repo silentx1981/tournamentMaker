@@ -26,7 +26,7 @@ extends ExcelHelper
 		
 		$row = $row + 2;
 		$counter = 0;
-		$teams = $this->server->getParameter('team', []);
+		$teams = $this->teams;
 		foreach ($teams AS $team) {
 			$columnName = Config::columnNames[$counter] ?? 'A';
 			$this->spreadsheet->getActiveSheet()->getColumnDimension($columnName)->setWidth(40);

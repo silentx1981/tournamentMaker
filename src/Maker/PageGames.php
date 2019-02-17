@@ -11,7 +11,12 @@ use TournamentMaker\Helper\ExcelHelper;
 class PageGames
 extends ExcelHelper
 {
-	
+	private $plan = [
+		"vorrunde" => [],
+		"rueckrunde" => [],
+	];
+
+
 	public function setData(Spreadsheet $spreadsheet)
 	{
 		$this->spreadsheet = $spreadsheet;
@@ -27,6 +32,13 @@ extends ExcelHelper
 		$this->spreadsheet->getActiveSheet()->getColumnDimension("E")->setWidth(3);
 		$this->spreadsheet->getActiveSheet()->getColumnDimension("F")->setWidth(3);
 		$this->spreadsheet->getActiveSheet()->getColumnDimension("G")->setWidth(3);
+		$teams = $this->server->getParameter('team', []);
+		foreach ($teams as $team) {
+			if (!isset($this->plan['vorrunde'][$team]))
+				$this->plan['vorrunde'][$team] = ['B' => [], 'D' => []];
+			if (!isset($this->plan['rueckrunde'][$team]))
+				$this->plan['rueckrunde'][$team] = ['B' => [], 'D' => []];
+		}
 		
 		// Turniername anzeigen
 		$row = 2;
@@ -40,11 +52,13 @@ extends ExcelHelper
 			$row++;
 			$this->setCellValue("A$row", $nr + 1, Config::getDefaultStyle());
 			$this->setCellValue("B$row", $game[1], Config::getDefaultStyle());
-			$this->setCellValue("C$row", '-', Config::getDefaultStyle());
+			$this->plan['vorrunde'][$game[1]]['B'][$row] = $game[2];
+			$this->setCellValue("C$row", '-', Config::getDefaultStyle(['align' => 'center']));
 			$this->setCellValue("D$row", $game[2], Config::getDefaultStyle());
-			$this->setCellValue("E$row", "", Config::getInputStyle());
-			$this->setCellValue("F$row", ":", Config::getDefaultStyle());
-			$this->setCellValue("G$row", "", Config::getInputStyle());
+			$this->plan['vorrunde'][$game[2]]['D'][$row] = $game[1];
+			$this->setCellValue("E$row", "", Config::getInputStyle(['align' => 'center']));
+			$this->setCellValue("F$row", ":", Config::getDefaultStyle(['align' => 'center']));
+			$this->setCellValue("G$row", "", Config::getInputStyle(['align' => 'center']));
 		}
 
 		// Rückrunde
@@ -55,19 +69,26 @@ extends ExcelHelper
 			$row++;
 			$this->setCellValue("A$row", count($games) + $nr + 2, Config::getDefaultStyle());
 			$this->setCellValue("B$row", $game[1], Config::getDefaultStyle());
-			$this->setCellValue("C$row", '-', Config::getDefaultStyle());
+			$this->plan['rueckrunde'][$game[1]]['B'][$row] = $game[2];
+			$this->setCellValue("C$row", '-', Config::getDefaultStyle(['align' => 'center']));
 			$this->setCellValue("D$row", $game[2], Config::getDefaultStyle());
-			$this->setCellValue("E$row", "", Config::getInputStyle());
-			$this->setCellValue("F$row", ":", Config::getDefaultStyle());
-			$this->setCellValue("G$row", "", Config::getInputStyle());
+			$this->plan['rueckrunde'][$game[2]]['D'][$row] = $game[1];
+			$this->setCellValue("E$row", "", Config::getInputStyle(['align' => 'center']));
+			$this->setCellValue("F$row", ":", Config::getDefaultStyle(['align' => 'center']));
+			$this->setCellValue("G$row", "", Config::getInputStyle(['align' => 'center']));
 		}
 		
 		return $this->spreadsheet;
 	}
+
+	public function getPlan()
+	{
+		return $this->plan;
+	}
 	
 	private function getGames($rueckrunde = false)
 	{
-		$teams = $this->server->getParameter('team', []);
+		$teams = $this->teams;
 
 		$planner = new Planner();
 		$spielplan = $planner->generate(count($teams), $rueckrunde);

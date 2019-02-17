@@ -21,14 +21,22 @@ class Maker
 	
 	public function make(Server $server)
 	{
+		$pteams = $server->getParameter('team');
+		$teams = [];
+		foreach ($pteams AS $team)
+			if (trim($team) !== "")
+				$teams[] = $team;
+
 		$this->spreadsheet = new Spreadsheet();
 		$this->spreadsheet->removeSheetByIndex(0);
-		$pageConfig = new PageConfig($server);
+		$pageConfig = new PageConfig($server, $teams);
 		$this->spreadsheet = $pageConfig->setData($this->spreadsheet);
-		$pageTeams = new PageTeams($server);
+		$pageTeams = new PageTeams($server, $teams);
 		$this->spreadsheet = $pageTeams->setData($this->spreadsheet);
-		$pageGames = new PageGames($server);
+		$pageGames = new PageGames($server, $teams);
 		$this->spreadsheet = $pageGames->setData($this->spreadsheet);
+		$pageResults = new PageResults($server, $teams);
+		$this->spreadsheet = $pageResults->setData($this->spreadsheet, $pageGames->getPlan());
 		
 		$this->download();
 		

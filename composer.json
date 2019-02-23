@@ -9,7 +9,7 @@
   , "require": {
      "php": "^7.0"
      ,"phpoffice/phpspreadsheet": "^1.6"
-     ,"silentx81/gameplanner": "dev-master"
+     ,"silentx81/gameplanner": "^0.1.0"
   }
   , "autoload": {
     "psr-4": { "TournamentMaker\\": ["src/"] }

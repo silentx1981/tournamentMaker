@@ -2,87 +2,85 @@
     <head>
         <title>Tournament Maker</title>
         <link rel="stylesheet" href="{basePath}css/bootstrap.min.css">
+        <link rel="stylesheet" href="{basePath}css/sweetalert2.css">
+        <link rel="stylesheet" href="{basePath}css/fontawesome.all.min.css">
         <link rel="stylesheet" href="{basePath}css/tournamentMaker.css">
     </head>
-    <body>
+    <body ng-app="tournamentMaker">
+        <script type="text/javascript">
+            var basePath = '{basePath}';
+        </script>
+        <br>
 
-    <div class="container">
+        <div class="container" ng-controller="TournamentController">
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            TournamentMaker {version}
+                        </div>
+
+                        <div class="card-body text-left container">
+
+                            <div class="row">
+
+                                <div class="col-lg-6">
+
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Teams
+                                        </div>
+
+                                        <div class="card-body">
+
+                                            <div class="alert alert-info">
+                                                <small class="form-text text-muted">
+                                                    <i class="fas fa-info-circle"></i>
+                                                    Sie müssen zwischen 3 und 10 Teams definieren
+                                                </small>
+                                            </div>
+
+                                            <div class="form-group" ng-repeat="team in teams track by $index">
+                                                <label>Teamname {{$index + 1}}</label>
+                                                <input type="text" class="form-control" ng-model="teams[$index].name">
+                                            </div>
+
+                                            <button class="btn btn-success" ng-disabled="teams.length > 9" ng-click="add()"><i class="fas fa-plus-circle"></i> Team hinzufügen</button>
+                                            <button class="btn btn-danger" ng-disabled="teams.length < 4" ng-click="remove()"><i class="fas fa-minus-circle"></i> Team entfernen</button>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="card-footer">
+                            <button class="btn btn-primary" ng-click="generate()"><i class="fas fa-file-excel"></i> Excel generieren</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
 
         <br>
-        <div class="alert alert-primary">
-            TournamentMaker {version}
-        </div>
-
-        <div class="card container">
-
-            <form action="{basePath}" method="POST">
-                <input type="hidden" name="create" value="1">
-
-                <div class="form-group">
-                    <label>Teamname 1</label>
-                    <input type="text" class="form-control" name="team[]">
-                </div>
-
-                <div class="form-group">
-                    <label>Teamname 2</label>
-                    <input type="text" class="form-control" name="team[]">
-                </div>
-
-                <div class="form-group">
-                    <label>Teamname 3</label>
-                    <input type="text" class="form-control" name="team[]">
-                </div>
-
-                <div class="form-group">
-                    <label>Teamname 4</label>
-                    <input type="text" class="form-control" name="team[]">
-                </div>
-
-                <div class="form-group">
-                    <label>Teamname 5</label>
-                    <input type="text" class="form-control" name="team[]">
-                </div>
-
-                <div class="form-group">
-                    <label>Teamname 6</label>
-                    <input type="text" class="form-control" name="team[]">
-                </div>
-
-                <div class="form-group">
-                    <label>Teamname 7</label>
-                    <input type="text" class="form-control" name="team[]">
-                </div>
-
-                <div class="form-group">
-                    <label>Teamname 8</label>
-                    <input type="text" class="form-control" name="team[]">
-                </div>
-
-                <div class="form-group">
-                    <label>Teamname 9</label>
-                    <input type="text" class="form-control" name="team[]">
-                </div>
-
-                <div class="form-group">
-                    <label>Teamname 10</label>
-                    <input type="text" class="form-control" name="team[]">
-                </div>
-
-                <input type="submit" class="btn btn-primary" value="Excel erstellen">
-
-            </form>
-
-        </div>
-    </div>
-
-
-    </div>
-
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
         <script src="{basePath}js/bootstrap.bundle.min.js"></script>
         <script src="{basePath}js/angular.min.js"></script>
         <script src="{basePath}js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+        <script src="{basePath}js/angular-file-saver.bundle.js"></script>
+        <script src="{basePath}js/sweetalert2.js"></script>
+        <script src="{basePath}js/fontawesome.all.min.js"></script>
+        <script src="{basePath}js/tournamentMaker.js"></script>
     </body>
 </html>

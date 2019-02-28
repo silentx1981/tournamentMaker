@@ -12,6 +12,7 @@ namespace TournamentMaker\Maker;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use TournamentMaker\Core\Exception;
 use TournamentMaker\Core\Server;
 
 class Maker
@@ -21,11 +22,11 @@ class Maker
 	
 	public function make(Server $server)
 	{
-		$pteams = $server->getParameter('team');
+		$pteams = $server->getParameter('teams');
 		$teams = [];
 		foreach ($pteams AS $team)
-			if (trim($team) !== "")
-				$teams[] = $team;
+			if (trim($team['name'] ?? '') !== "")
+				$teams[] = $team['name'];
 
 		$this->spreadsheet = new Spreadsheet();
 		$this->spreadsheet->removeSheetByIndex(0);

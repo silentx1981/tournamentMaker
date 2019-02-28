@@ -17,6 +17,7 @@ extends ExcelHelper
 	public function setData(Spreadsheet $spreadsheet, $plan)
 	{
 		$this->spreadsheet = $spreadsheet;
+		$resultdetailed = $this->server->getParameter('resultdetailed', false);
 		
 		$sheet = new Worksheet(null, 'Resultate');
 		$this->spreadsheet->addSheet($sheet, 3);
@@ -29,6 +30,8 @@ extends ExcelHelper
 		$teamLines = [];
 		for ($i = 0; $i < count($teams); $i++) {
 			$this->spreadsheet->getActiveSheet()->getColumnDimension($this->getColumnByInt($i + 1))->setWidth(3);
+			if (!$resultdetailed)
+				$this->spreadsheet->getActiveSheet()->getColumnDimension($this->getColumnByInt($i + 1))->setVisible(false);
 			if (!isset($teamLines[$teams[$i]]))
 				$teamLines[$teams[$i]] = [
 					"vorrunde" => null,
@@ -36,6 +39,8 @@ extends ExcelHelper
 				];
 		}
 		$lastColumnInt = count($teams) + 1;
+		if (!$resultdetailed)
+			$this->spreadsheet->getActiveSheet()->getColumnDimension($this->getColumnByInt($lastColumnInt))->setVisible(false);
 		$this->spreadsheet->getActiveSheet()->getColumnDimension($this->getColumnByInt($lastColumnInt + 1))->setWidth(10);
 		$this->spreadsheet->getActiveSheet()->getColumnDimension($this->getColumnByInt($lastColumnInt + 2))->setWidth(10);
 		$this->spreadsheet->getActiveSheet()->getColumnDimension($this->getColumnByInt($lastColumnInt + 3))->setWidth(10);

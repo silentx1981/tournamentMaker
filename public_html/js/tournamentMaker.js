@@ -9,6 +9,7 @@ tournamentMaker.controller('TournamentController', function($scope, $http, FileS
 		data.create = 1;
 		data.teams = $scope.teams;
 		data.tournamentname = $scope.tournamentname;
+		data.resultdetailed = $scope.resultdetailed;
 
 		$http.post(basePath, JSON.stringify(data), {responseType: 'blob'}).then(function(response) {
 			FileSaver.saveAs(response.data, 'test.xlsx');

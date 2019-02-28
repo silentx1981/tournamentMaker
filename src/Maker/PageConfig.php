@@ -14,6 +14,7 @@ extends ExcelHelper
 	public function setData(Spreadsheet $spreadsheet)
 	{
 		$this->spreadsheet = $spreadsheet;
+		$this->setMetaData();
 		
 		$sheet = new Worksheet(null, 'Konfiguration');
 		$this->spreadsheet->addSheet($sheet, 0);
@@ -27,7 +28,7 @@ extends ExcelHelper
 		$this->setCellValue("A$row:B$row", 'Allgemein', Config::getHeaderStyle());
 		$row++;
 		$this->setCellValue("A$row", 'Turniername', Config::getDefaultStyle());
-		$this->setCellValue("B$row", 'Default Turnier', Config::getInputStyle());
+		$this->setCellValue("B$row", $this->server->getParameter('tournamentname'), Config::getInputStyle());
 		
 		
 		// Mannschaften
@@ -43,5 +44,15 @@ extends ExcelHelper
 		}
 		
 		return $this->spreadsheet;
+	}
+
+	private function setMetaData()
+	{
+		$version = file_get_contents('../version');
+		$this->spreadsheet->getProperties()->setCreator('silentx81/tournamentmaker');
+		$this->spreadsheet->getProperties()->setTitle('Tournamentmaker '.$version);
+		$this->spreadsheet->getProperties()->setSubject('Tournamentmaker '.$version);
+		$this->spreadsheet->getProperties()->setDescription("Tournamentmaker $version \nhttps://github.com/silentx1981/tournamentMaker");
+		$this->spreadsheet->getProperties()->setKeywords('Tournamentmaker Gameplanner silentx81 raffaelwyss');
 	}
 }

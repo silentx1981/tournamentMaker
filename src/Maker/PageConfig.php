@@ -5,6 +5,7 @@ namespace TournamentMaker\Maker;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use TournamentMaker\Core\Helper;
 use TournamentMaker\Helper\ExcelHelper;
 
 class PageConfig
@@ -48,7 +49,7 @@ extends ExcelHelper
 
 	private function setMetaData()
 	{
-		$version = file_get_contents('../version');
+		$version = Helper::getVersion();
 		$this->spreadsheet->getProperties()->setCreator('silentx81/tournamentmaker');
 		$this->spreadsheet->getProperties()->setTitle('Tournamentmaker '.$version);
 		$this->spreadsheet->getProperties()->setSubject('Tournamentmaker '.$version);

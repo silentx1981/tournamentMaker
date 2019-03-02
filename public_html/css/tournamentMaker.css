@@ -1,3 +1,8 @@
 body {
     background-color: #6688AA;
 }
+
+.container-vertical-center {
+    display: flex;
+    align-items: center;
+}

@@ -16,7 +16,7 @@ tournamentMaker.controller('TournamentController', function($scope, $http, FileS
 		data.backfirsttime = '@' + Math.round($scope.backfirsttime.getTime()/1000);
 
 		$http.post(basePath, JSON.stringify(data), {responseType: 'blob'}).then(function(response) {
-			FileSaver.saveAs(response.data, 'test.xlsx');
+			FileSaver.saveAs(response.data, $scope.tournamentname+'.xlsx');
 		}, function(response) {
 			var reader = new FileReader();
 			reader.onload = function() {

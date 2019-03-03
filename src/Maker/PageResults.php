@@ -64,12 +64,12 @@ extends ExcelHelper
 			$row++;
 			$teamLines[$team]['vorrunde'] = $row;
 			$this->setCellValue("A$row", $team, Config::getDefaultStyle(['bold' => true]));
-			$planData = $plan['vorrunde'][$team]['B'] ?? [];
+			$planData = $plan['vorrunde'][$team]['C'] ?? [];
 			$columnInt = 1;
 
 			foreach ($teams as $subTeam) {
 				$posHome = array_search($subTeam, $planData);
-				$posGuest = array_search($team, $plan['vorrunde'][$subTeam]['B'] ?? []);
+				$posGuest = array_search($team, $plan['vorrunde'][$subTeam]['C'] ?? []);
 				if ($posHome)
 					$this->setCellValue($this->getColumnByInt($columnInt).$row, $this->getFormelHomeGegner($posHome), Config::getDefaultStyle());
 				else if ($posGuest)
@@ -101,7 +101,6 @@ extends ExcelHelper
 			$this->setCellValue($this->getColumnByInt($columnInt).$row, "=SUM(\$B$row:\$D$row, 0)", config::getDefaultStyle(['align' => 'center']));
 		}
 
-
 		// Rückrunde
 		$row = $row + 2;
 		$data = $this->setHeaderTable($row, $maxColumnName, 'Rückrunde');
@@ -110,11 +109,11 @@ extends ExcelHelper
 			$row++;
 			$teamLines[$team]['rueckrunde'] = $row;
 			$this->setCellValue("A$row", $team, Config::getDefaultStyle(['bold' => true]));
-			$planData = $plan['rueckrunde'][$team]['B'];
+			$planData = $plan['rueckrunde'][$team]['C'];
 			$columnInt = 1;
 			foreach ($teams as $subTeam) {
 				$posHome = array_search($subTeam, $planData);
-				$posGuest = array_search($team, $plan['rueckrunde'][$subTeam]['B'] ?? []);
+				$posGuest = array_search($team, $plan['rueckrunde'][$subTeam]['C'] ?? []);
 				if ($posHome)
 					$this->setCellValue($this->getColumnByInt($columnInt).$row, $this->getFormelHomeGegner($posHome), Config::getDefaultStyle());
 				else if ($posGuest)
@@ -217,8 +216,8 @@ extends ExcelHelper
 	private function getFormelHomeGegner($row)
 	{
 		$register = "Spiele";
-		$home = '$E'.$row;
-		$guest = '$G'.$row;
+		$home = '$F'.$row;
+		$guest = '$H'.$row;
 		$result = '=IF(';
 		$result .= "'$register'!$home>'$register'!$guest,3,";
 		$result .= "IF(";
@@ -234,8 +233,8 @@ extends ExcelHelper
 	private function getFormelGegnerHome($row)
 	{
 		$register = "Spiele";
-		$home = '$E'.$row;
-		$guest = '$G'.$row;
+		$home = '$F'.$row;
+		$guest = '$H'.$row;
 		$result = '=IF(';
 		$result .= "'$register'!$home<'$register'!$guest,3,";
 		$result .= "IF(";
@@ -252,18 +251,18 @@ extends ExcelHelper
 	{
 		$data = [];
 		if ($type === 'home') {
-			foreach ($rows['B'] ?? [] AS $key => $row) {
-				$data[] = "'Spiele'!" . '$E' . $key;
+			foreach ($rows['C'] ?? [] AS $key => $row) {
+				$data[] = "'Spiele'!" . '$F' . $key;
 			}
-			foreach ($rows['D'] ?? []  AS $key => $row) {
-				$data[] = "'Spiele'!" . '$G' . $key;
+			foreach ($rows['E'] ?? []  AS $key => $row) {
+				$data[] = "'Spiele'!" . '$H' . $key;
 			}
 		} else if ($type === 'guest') {
-			foreach ($rows['B'] ?? []  AS $key => $row) {
-				$data[] = "'Spiele'!" . '$G' . $key;
+			foreach ($rows['C'] ?? []  AS $key => $row) {
+				$data[] = "'Spiele'!" . '$H' . $key;
 			}
-			foreach ($rows['D'] ?? []  AS $key => $row) {
-				$data[] = "'Spiele'!" . '$E' . $key;
+			foreach ($rows['E'] ?? []  AS $key => $row) {
+				$data[] = "'Spiele'!" . '$F' . $key;
 			}
 		}
 		$result = '='.implode("+", $data);

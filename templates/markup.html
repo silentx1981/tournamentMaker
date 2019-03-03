@@ -58,6 +58,49 @@
                                         </div>
 
                                     </div>
+                                    <br>
+                                    <div class="card">
+
+                                        <div class="card-header">
+                                            Zeiten
+                                        </div>
+
+                                        <div class="card-body">
+
+                                            <div class="form-group">
+                                                <label>Spieldauer</label>
+                                                <div class="input-group">
+                                                    <input type="number" min="1" class="form-control" ng-model="duration">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">Minuten</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Spielpause</label>
+                                                <div class="input-group">
+                                                    <input type="number" min="0" class="form-control" ng-model="pause">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">Minuten</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Erstes Spiel Vorrunde</label>
+                                                <div uib-timepicker ng-model="prefirsttime" hour-step="1" minute-step="1" show-meridian="ismeridian"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Erstes Spiel Rückrunde</label>
+                                                <div uib-timepicker ng-model="backfirsttime" hour-step="1" minute-step="1" show-meridian="ismeridian"></div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
                                 </div>
 
                                 <div class="col-lg-6">
@@ -114,7 +157,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
         <script src="{basePath}js/bootstrap.bundle.min.js"></script>
         <script src="{basePath}js/angular.min.js"></script>
-        <script src="{basePath}js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+        <script src="{basePath}js/ui-bootstrap-tpls.js"></script>
         <script src="{basePath}js/angular-file-saver.bundle.js"></script>
         <script src="{basePath}js/sweetalert2.js"></script>
         <script src="{basePath}js/fontawesome.all.min.js"></script>

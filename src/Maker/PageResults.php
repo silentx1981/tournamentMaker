@@ -88,14 +88,15 @@ extends ExcelHelper
 				$columnInt++;
 			}
 
+			$lastColumn = $this->getColumnByInt(count($teams));
 			$columnInt++;
-			$this->setCellValue($this->getColumnByInt($columnInt).$row, "=COUNT(\$B$row:\$D$row)", config::getDefaultStyle(['align' => 'center']));
+			$this->setCellValue($this->getColumnByInt($columnInt).$row, "=COUNT(\$B$row:\$$lastColumn$row)", config::getDefaultStyle(['align' => 'center']));
 			$columnInt++;
-			$this->setCellValue($this->getColumnByInt($columnInt).$row, "=COUNTIF(\$B$row:\$D$row, 3)", config::getDefaultStyle(['align' => 'center']));
+			$this->setCellValue($this->getColumnByInt($columnInt).$row, "=COUNTIF(\$B$row:\$$lastColumn$row, 3)", config::getDefaultStyle(['align' => 'center']));
 			$columnInt++;
-			$this->setCellValue($this->getColumnByInt($columnInt).$row, "=COUNTIF(\$B$row:\$D$row, 1)", config::getDefaultStyle(['align' => 'center']));
+			$this->setCellValue($this->getColumnByInt($columnInt).$row, "=COUNTIF(\$B$row:\$$lastColumn$row, 1)", config::getDefaultStyle(['align' => 'center']));
 			$columnInt++;
-			$this->setCellValue($this->getColumnByInt($columnInt).$row, "=COUNTIF(\$B$row:\$D$row, 0)", config::getDefaultStyle(['align' => 'center']));
+			$this->setCellValue($this->getColumnByInt($columnInt).$row, "=COUNTIF(\$B$row:\$$lastColumn$row, 0)", config::getDefaultStyle(['align' => 'center']));
 			$columnInt++;
 			$this->setCellValue($this->getColumnByInt($columnInt).$row, $this->getFormelTore($plan['vorrunde'][$team], 'home'), config::getDefaultStyle(['align' => 'center']));
 			$columnInt++;

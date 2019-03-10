@@ -14,6 +14,10 @@ tournamentMaker.controller('TournamentController', function($scope, $http, FileS
 		data.pause = $scope.pause;
 		data.prefirsttime = '@' + Math.round($scope.prefirsttime.getTime()/1000);
 		data.backfirsttime = '@' + Math.round($scope.backfirsttime.getTime()/1000);
+		data.finalpairs = $scope.finalpairs;
+		data.prefirsttimeko = '@' + Math.round($scope.prefirsttimeko.getTime()/1000);
+		data.durationko = $scope.durationko;
+		data.pauseko = $scope.pauseko;
 
 		$http.post(basePath, JSON.stringify(data), {responseType: 'blob'}).then(function(response) {
 			FileSaver.saveAs(response.data, $scope.tournamentname+'.xlsx');
@@ -38,6 +42,12 @@ tournamentMaker.controller('TournamentController', function($scope, $http, FileS
 	$scope.backfirsttime = new Date();
 	$scope.backfirsttime.setHours(13);
 	$scope.backfirsttime.setMinutes(0);
+	$scope.prefirsttimeko = new Date();
+	$scope.prefirsttimeko.setHours(17);
+	$scope.prefirsttimeko.setMinutes(0);
+	$scope.finalpairs = 0;
+	$scope.durationko = 10;
+	$scope.pauseko = 5;
 
 	$scope.add = function() {
 

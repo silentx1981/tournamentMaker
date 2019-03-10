@@ -101,6 +101,59 @@
 
                                     </div>
 
+                                    <br>
+                                    <div class="card">
+
+                                        <div class="card-header">
+                                            KO-Phase
+                                        </div>
+
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label>Finalpaarungen</label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="final" ng-model="finalpairs" ng-value="0">
+                                                    <label class="form-check-label" for="final">ab Final</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" ng-disabled="teams.length < 4" type="radio" id="semifinal" ng-model="finalpairs" ng-value="1">
+                                                    <label class="form-check-label" for="semifinal">ab Halbfinal <small ng-if="teams.length < 4" class="text-warning">(ab 4 Mannschaften)</small></label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" ng-disabled="teams.length < 8" type="radio" id="quarterfinal" ng-model="finalpairs" ng-value="2">
+                                                    <label class="form-check-label" for="quarterfinal">ab Viertelfinal <small ng-if="teams.length < 8" class="text-warning">(ab 8 Mannschaften)</small></label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Spieldauer</label>
+                                                <div class="input-group">
+                                                    <input type="number" min="1" class="form-control" ng-model="durationko">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">Minuten</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Spielpause</label>
+                                                <div class="input-group">
+                                                    <input type="number" ng-disabled="finalpairs < 1" min="0" class="form-control" ng-model="pauseko">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">Minuten</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Erstes Spiel KO-Phase</label>
+                                                <div uib-timepicker ng-model="prefirsttimeko" hour-step="1" minute-step="1" show-meridian="ismeridian"></div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
                                 </div>
 
                                 <div class="col-lg-6">

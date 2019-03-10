@@ -38,6 +38,8 @@ class Maker
 		$this->spreadsheet = $pageGames->setData($this->spreadsheet);
 		$pageResults = new PageResults($server, $teams);
 		$this->spreadsheet = $pageResults->setData($this->spreadsheet, $pageGames->getPlan());
+		$pageKo = new PageKo($server, $teams);
+		$this->spreadsheet = $pageKo->setData($this->spreadsheet);
 		
 		$this->download();
 		

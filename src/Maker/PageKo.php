@@ -19,8 +19,8 @@ extends ExcelHelper
 		$this->spreadsheet = $spreadsheet;
 		
 		$sheet = new Worksheet(null, 'KO-Phase');
-		$this->spreadsheet->addSheet($sheet, 4);
-		$this->spreadsheet->setActiveSheetIndex(4);
+		$this->spreadsheet->addSheet($sheet, 5);
+		$this->spreadsheet->setActiveSheetIndex(5);
 		$this->setup();
 		$this->spreadsheet->getActiveSheet()->getColumnDimension("A")->setWidth(6);
 		$this->spreadsheet->getActiveSheet()->getColumnDimension("B")->setWidth(6);

@@ -36,6 +36,8 @@ class Maker
 		$this->spreadsheet = $pageTeams->setData($this->spreadsheet);
 		$pageGames = new PageGames($server, $teams);
 		$this->spreadsheet = $pageGames->setData($this->spreadsheet);
+		$pageReferee = new PageReferee($server, $teams);
+		$this->spreadsheet = $pageReferee->setData($this->spreadsheet, $pageGames->getGames());
 		$pageResults = new PageResults($server, $teams);
 		$this->spreadsheet = $pageResults->setData($this->spreadsheet, $pageGames->getPlan());
 		$pageKo = new PageKo($server, $teams);

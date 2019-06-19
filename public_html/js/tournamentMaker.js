@@ -33,7 +33,11 @@ tournamentMaker.controller('TournamentController', function($scope, $http, FileS
 
 
 	$scope.teams = [{"name":"Team 1"}, {"name":"Team 2"}, {"name":"Team 3"}];
+	$scope.teams2 = [];
+	$scope.teams3 = [];
+	$scope.teams4 = [];
 	$scope.tournamentname = 'Mein Turnier';
+	$scope.locations = [{"name":"Platz 1"}];
 	$scope.duration = 10;
 	$scope.pause = 5;
 	$scope.prefirsttime = new Date();
@@ -49,17 +53,49 @@ tournamentMaker.controller('TournamentController', function($scope, $http, FileS
 	$scope.durationko = 10;
 	$scope.pauseko = 5;
 
-	$scope.add = function() {
+	$scope.add = function(groupNr) {
 
 		var tmp = {};
-		var nextTeamNr = $scope.teams.length + 1;
-		tmp.name = "Team "+nextTeamNr;
-		$scope.teams.push(tmp);
+		if (groupNr === undefined) {
+			var nextTeamNr = $scope.teams.length + 1;
+			tmp.name = "Team "+nextTeamNr;
+			$scope.teams.push(tmp);
+		} else if (groupNr === 2) {
+			var nextTeamNr = $scope.teams2.length + 1;
+			tmp.name = "Team "+nextTeamNr;
+			$scope.teams2.push(tmp);
+		} else if (groupNr === 3) {
+			var nextTeamNr = $scope.teams3.length + 1;
+			tmp.name = "Team "+nextTeamNr;
+			$scope.teams3.push(tmp);
+		} else if (groupNr === 4) {
+			var nextTeamNr = $scope.teams4.length + 1;
+			tmp.name = "Team "+nextTeamNr;
+			$scope.teams4.push(tmp);
+		}
 
 	}
 
-	$scope.remove = function () {
-		$scope.teams.pop();
+	$scope.remove = function (groupNr) {
+		if (groupNr === undefined)
+			$scope.teams.pop();
+		if (groupNr === 2)
+			$scope.teams2.pop();
+		if (groupNr === 3)
+			$scope.teams3.pop();
+		if (groupNr === 4)
+			$scope.teams4.pop();
+	}
+
+	$scope.addLocation = function() {
+		var tmp = {};
+		var nextLocationNr = $scope.locations.length + 1;
+		tmp.name = "Platz "+nextLocationNr;
+		$scope.locations.push(tmp);
+	}
+
+	$scope.removeLocation = function() {
+		$scope.locations.pop();
 	}
 
 });

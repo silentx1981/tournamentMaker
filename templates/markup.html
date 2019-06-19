@@ -37,6 +37,7 @@
 
                                 <div class="col-lg-6">
 
+
                                     <div class="card">
 
                                         <div class="card-header">
@@ -59,6 +60,7 @@
 
                                     </div>
                                     <br>
+
                                     <div class="card">
 
                                         <div class="card-header">
@@ -100,8 +102,8 @@
                                         </div>
 
                                     </div>
-
                                     <br>
+
                                     <div class="card">
 
                                         <div class="card-header">
@@ -153,10 +155,11 @@
                                         </div>
 
                                     </div>
+                                    <br>
 
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 container">
 
                                     <div class="card">
                                         <div class="card-header">
@@ -165,20 +168,112 @@
 
                                         <div class="card-body">
 
+                                            <uib-tabset>
+                                                <uib-tab index="0" heading="Gruppe 1">
+
+                                                    <div class="tab-container">
+                                                        <div class="alert alert-info">
+                                                            <small class="form-text text-muted">
+                                                                <i class="fas fa-info-circle"></i>
+                                                                Sie müssen zwischen 3 und 10 Teams definieren
+                                                            </small>
+                                                        </div>
+
+                                                        <div class="form-group" ng-repeat="team in teams track by $index">
+                                                            <label>Teamname {{$index + 1}}</label>
+                                                            <input type="text" class="form-control" ng-model="teams[$index].name">
+                                                        </div>
+
+                                                        <button class="btn btn-success" ng-disabled="teams.length > 9" ng-click="add()"><i class="fas fa-plus-circle"></i> Team hinzufügen</button>
+                                                        <button class="btn btn-danger" ng-disabled="teams.length < 4" ng-click="remove()"><i class="fas fa-minus-circle"></i> Team entfernen</button>
+
+                                                    </div>
+
+                                                </uib-tab>
+                                                <uib-tab index="1" heading="Gruppe 2">
+                                                    <div class="tab-container">
+                                                        <div class="alert alert-info">
+                                                            <small class="form-text text-muted">
+                                                                <i class="fas fa-info-circle"></i>
+                                                                Sie müssen mindestens 3 und maximal 10 Teams definieren
+                                                            </small>
+                                                        </div>
+                                                        <div class="form-group" ng-repeat="team in teams2 track by $index">
+                                                            <label>Teamname {{$index + 1}}</label>
+                                                            <input type="text" class="form-control" ng-model="teams2[$index].name">
+                                                        </div>
+
+                                                        <button class="btn btn-success" ng-disabled="teams2.length > 9" ng-click="add(2)"><i class="fas fa-plus-circle"></i> Team hinzufügen</button>
+                                                        <button class="btn btn-danger" ng-click="remove(2)"><i class="fas fa-minus-circle"></i> Team entfernen</button>
+
+                                                    </div>
+                                                </uib-tab>
+                                                <uib-tab index="2" heading="Gruppe 3">
+                                                    <div class="tab-container">
+                                                        <div class="alert alert-info">
+                                                            <small class="form-text text-muted">
+                                                                <i class="fas fa-info-circle"></i>
+                                                                Sie müssen mindestens 3 und maximal 10 Teams definieren
+                                                            </small>
+                                                        </div>
+
+                                                        <div class="form-group" ng-repeat="team in teams3 track by $index">
+                                                            <label>Teamname {{$index + 1}}</label>
+                                                            <input type="text" class="form-control" ng-model="teams3[$index].name">
+                                                        </div>
+
+                                                        <button class="btn btn-success" ng-disabled="teams3.length > 9" ng-click="add(3)"><i class="fas fa-plus-circle"></i> Team hinzufügen</button>
+                                                        <button class="btn btn-danger" ng-click="remove(3)"><i class="fas fa-minus-circle"></i> Team entfernen</button>
+
+                                                    </div>
+                                                </uib-tab>
+                                                <uib-tab index="3" heading="Gruppe 4">
+                                                    <div class="tab-container">
+                                                        <div class="alert alert-info">
+                                                            <small class="form-text text-muted">
+                                                                <i class="fas fa-info-circle"></i>
+                                                                Sie müssen mindestens 3 und maximal 10 Teams definieren
+                                                            </small>
+                                                        </div>
+
+                                                        <div class="form-group" ng-repeat="team in teams4 track by $index">
+                                                            <label>Teamname {{$index + 1}}</label>
+                                                            <input type="text" class="form-control" ng-model="teams4[$index].name">
+                                                        </div>
+
+                                                        <button class="btn btn-success" ng-disabled="teams4.length > 9" ng-click="add(4)"><i class="fas fa-plus-circle"></i> Team hinzufügen</button>
+                                                        <button class="btn btn-danger" ng-click="remove(4)"><i class="fas fa-minus-circle"></i> Team entfernen</button>
+
+                                                    </div>
+                                                </uib-tab>
+                                            </uib-tabset>
+
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Plätze
+                                        </div>
+
+                                        <div class="card-body">
+
                                             <div class="alert alert-info">
                                                 <small class="form-text text-muted">
                                                     <i class="fas fa-info-circle"></i>
-                                                    Sie müssen zwischen 3 und 10 Teams definieren
+                                                    Sie müssen mindestens 1 und maximal 3 Plätze definieren
                                                 </small>
                                             </div>
 
-                                            <div class="form-group" ng-repeat="team in teams track by $index">
-                                                <label>Teamname {{$index + 1}}</label>
-                                                <input type="text" class="form-control" ng-model="teams[$index].name">
+                                            <div class="form-group" ng-repeat="location in locations track by $index">
+                                                <label>Platz {{$index + 1}}</label>
+                                                <input type="text" class="form-control" ng-model="locations[$index].name">
                                             </div>
 
-                                            <button class="btn btn-success" ng-disabled="teams.length > 9" ng-click="add()"><i class="fas fa-plus-circle"></i> Team hinzufügen</button>
-                                            <button class="btn btn-danger" ng-disabled="teams.length < 4" ng-click="remove()"><i class="fas fa-minus-circle"></i> Team entfernen</button>
+                                            <button class="btn btn-success" ng-disabled="locations.length > 2" ng-click="addLocation()"><i class="fas fa-plus-circle"></i> Platz hinzufügen</button>
+                                            <button class="btn btn-danger" ng-disabled="locations.length < 2" ng-click="removeLocation()"><i class="fas fa-minus-circle"></i> Platz entfernen</button>
+
 
                                         </div>
                                     </div>

@@ -30,8 +30,24 @@ extends ExcelHelper
 		$row++;
 		$this->setCellValue("A$row", 'Turniername', Config::getDefaultStyle());
 		$this->setCellValue("B$row", $this->server->getParameter('tournamentname'), Config::getInputStyle());
-		
-		
+
+		/*
+		// Teams (Gruppen)
+		foreach ($this->teams AS $key => $teamsgroup) {
+			$row = $row + 2;
+			$this->setCellValue("A$row:B$row", "Gruppe "+($key + 1), Config::getHeaderStyle());
+			$counter = 1;
+			foreach ($teamsgroup AS $team) {
+				$row++;
+				$this->setCellValue("A$row", "Team$counter", Config::getDefaultStyle());
+				$this->setCellValue("B$row", $team, Config::getInputStyle());
+				$counter++;
+			}
+		}
+		*/
+
+
+		/*
 		// Mannschaften
 		$row = $row + 2;
 		$this->setCellValue("A$row:B$row", "Mannschaften", Config::getHeaderStyle());
@@ -43,6 +59,7 @@ extends ExcelHelper
 			$this->setCellValue("B$row", $team, Config::getInputStyle());
 			$counter++;
 		}
+		*/
 		
 		return $this->spreadsheet;
 	}

@@ -6,3 +6,31 @@ body {
     display: flex;
     align-items: center;
 }
+
+li.active a.ng-binding {
+    color: #000 !important;
+    background-color: #ffff00 !important;
+    text-decoration: none;
+}
+
+li a.ng-binding {
+    color: #777777;
+    background-color: rgba(200, 200, 200, 0.3);
+    text-decoration: none;
+}
+
+.tab-container {
+    border-style: solid;
+    border-color: #dcdcdc;
+    border-width: 0px 1px 1px 1px;
+    background-color: #FFFFFF;
+    padding: 15px;
+}
+
+.nav-tabs .nav-link {
+    border: 1px solid rgba(150, 150, 150, 0.5);
+}
+
+.xtraSpace {
+    margin: 20px 20px;
+}

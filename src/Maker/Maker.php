@@ -22,25 +22,25 @@ class Maker
 	
 	public function make(Server $server)
 	{
-		$pteams = $server->getParameter('teams');
-		$teams = [];
-		foreach ($pteams AS $team)
-			if (trim($team['name'] ?? '') !== "")
-				$teams[] = $team['name'];
+		$teams1 = $this->getTeams($server, 'teams');
+		$teams2 = $this->getTeams($server, 'teams2');
+		$teams3 = $this->getTeams($server, 'teams3');
+		$teams4 = $this->getTeams($server, 'teams4');
+		$teams = [$teams1, $teams2, $teams3, $teams3];
 
 		$this->spreadsheet = new Spreadsheet();
 		$this->spreadsheet->removeSheetByIndex(0);
-		$pageConfig = new PageConfig($server, $teams);
+		$pageConfig = new PageConfig($server, $teams1);
 		$this->spreadsheet = $pageConfig->setData($this->spreadsheet);
-		$pageTeams = new PageTeams($server, $teams);
+		$pageTeams = new PageTeams($server, $teams1);
 		$this->spreadsheet = $pageTeams->setData($this->spreadsheet);
-		$pageGames = new PageGames($server, $teams);
+		$pageGames = new PageGames($server, $teams1);
 		$this->spreadsheet = $pageGames->setData($this->spreadsheet);
 		$pageReferee = new PageReferee($server, $teams);
 		$this->spreadsheet = $pageReferee->setData($this->spreadsheet, $pageGames->getGames());
 		$pageResults = new PageResults($server, $teams);
 		$this->spreadsheet = $pageResults->setData($this->spreadsheet, $pageGames->getPlan());
-		$pageKo = new PageKo($server, $teams);
+		$pageKo = new PageKo($server, $teams1);
 		$this->spreadsheet = $pageKo->setData($this->spreadsheet);
 		
 		$this->download();
@@ -57,5 +57,17 @@ class Maker
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 		header('Content-Disposition: attachment; filename="tournamentMaker.xlsx"');
 		$writer->save("php://output");
+	}
+
+	private function getTeams(Server $server, $name)
+	{
+		$teams = $server->getParameter($name);
+
+		$result = [];
+		foreach ($teams as $team)
+			if (trim($team['name'] ?? '') !== '')
+				$result[] = $team['name'];
+
+		return $result;
 	}
 }

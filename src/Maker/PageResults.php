@@ -56,8 +56,6 @@ extends ExcelHelper
 		$this->spreadsheet->getActiveSheet()->getColumnDimension($this->getColumnByInt($lastColumnInt + 12))->setWidth(10)->setVisible(false);
 		$this->spreadsheet->getActiveSheet()->getColumnDimension($this->getColumnByInt($lastColumnInt + 13))->setWidth(10);
 
-
-
 		// Turniername anzeigen
 		$row = 2;
 		$this->setCellValue("A$row", "=Konfiguration!B3", Config::getPageHeaderStyle());
@@ -72,7 +70,7 @@ extends ExcelHelper
 		foreach ($teams as $teamkey => $team) {
 			$row++;
 			$teamLines[$team]['vorrunde'] = $row;
-			$this->setCellValue("A$row", $team, Config::getDefaultStyle(['bold' => true]));
+			$this->setCellValue("A$row", '=Konfiguration!B'.(6 + $teamkey), Config::getDefaultStyle(['bold' => true]));
 			$planData = $plan['vorrunde'][$team]['D'] ?? [];
 			$columnInt = 1;
 
@@ -141,10 +139,10 @@ extends ExcelHelper
 		$row = $data['row'];
 		$firstRow = $row + 1;
 		$lastRow = $firstRow + count($teams) - 1;
-		foreach ($teams as $team) {
+		foreach ($teams as $teamkey => $team) {
 			$row++;
 			$teamLines[$team]['rueckrunde'] = $row;
-			$this->setCellValue("A$row", $team, Config::getDefaultStyle(['bold' => true]));
+			$this->setCellValue("A$row", '=Konfiguration!B'.(6 + $teamkey), Config::getDefaultStyle(['bold' => true]));
 			$planData = $plan['rueckrunde'][$team]['D'];
 			$columnInt = 1;
 			foreach ($teams as $subTeam) {
@@ -210,9 +208,9 @@ extends ExcelHelper
 		$row = $data['row'];
 		$firstRow = $row + 1;
 		$lastRow = $firstRow + count($teams) - 1;
-		foreach ($teams as $team) {
+		foreach ($teams as $teamkey => $team) {
 			$row++;
-			$this->setCellValue("A$row", $team, Config::getDefaultStyle(['bold' => true]));
+			$this->setCellValue("A$row", '=Konfiguration!B'.(6 + $teamkey), Config::getDefaultStyle(['bold' => true]));
 			$vorrunde = $teamLines[$team]['vorrunde'];
 			$rueckrunde = $teamLines[$team]['rueckrunde'];
 			$columnInt = count($teams) + 1;

@@ -29,8 +29,9 @@ extends ExcelHelper
 		$teams = $this->teams;
 		foreach ($teams AS $team) {
 			$columnName = Config::columnNames[$counter] ?? 'A';
+			$teamCoordinate = "=Konfiguration!B".(6+$counter);
 			$this->spreadsheet->getActiveSheet()->getColumnDimension($columnName)->setWidth(40);
-			$this->setCellValue("$columnName$row", $team, Config::getHeaderStyle());
+			$this->setCellValue("$columnName$row", $teamCoordinate, Config::getHeaderStyle());
 			$counter++;
 			for($i = $row + 1; $i < $row + 16; $i++)
 				$this->setCellValue("$columnName$i", "", Config::getInputStyle());

@@ -64,14 +64,15 @@ extends ExcelHelper
 		$this->setCellValue("A$row:I$row", 'Vorrunde', Config::getHeaderStyle());
 		$games = $this->createGames();
 		foreach ($games['planteams'] AS $nr => $game) {
+			$gameconnect = $games['planteamsconnect'][$nr];
 			$row++;
 			$this->setCellValue("A$row", $nr + 1, Config::getDefaultStyle());
 			$this->setCellValue("B$row", $pft->format('H:i'), Config::getDefaultStyle(['align' => 'center']));
 			$this->setCellValue("C$row", 'A', Config::getDefaultStyle());
-			$this->setCellValue("D$row", $game[1], Config::getDefaultStyle());
+			$this->setCellValue("D$row", $gameconnect[1], Config::getDefaultStyle());
 			$this->plan['vorrunde'][$game[1]]['D'][$row] = $game[2];
 			$this->setCellValue("E$row", '-', Config::getDefaultStyle(['align' => 'center']));
-			$this->setCellValue("F$row", $game[2], Config::getDefaultStyle());
+			$this->setCellValue("F$row", $gameconnect[2], Config::getDefaultStyle());
 			$this->plan['vorrunde'][$game[2]]['F'][$row] = $game[1];
 			$this->setCellValue("G$row", "", Config::getInputStyle(['align' => 'center']));
 			$this->setCellValue("H$row", ":", Config::getDefaultStyle(['align' => 'center']));
@@ -85,14 +86,15 @@ extends ExcelHelper
 		$this->setCellValue("A$row:I$row", 'Rückrunde', Config::getHeaderStyle());
 		$games = $this->getGames(true);
 		foreach ($games['planteams'] AS $nr => $game) {
+			$gameconnect = $games['planteamsconnect'][$nr];
 			$row++;
 			$this->setCellValue("A$row", count($games) + $nr + 2, Config::getDefaultStyle());
 			$this->setCellValue("B$row", $bft->format('H:i'), Config::getDefaultStyle(['align' => 'center']));
 			$this->setCellValue("C$row", 'A', Config::getDefaultStyle());
-			$this->setCellValue("D$row", $game[1], Config::getDefaultStyle());
+			$this->setCellValue("D$row", $gameconnect[1], Config::getDefaultStyle());
 			$this->plan['rueckrunde'][$game[1]]['D'][$row] = $game[2];
 			$this->setCellValue("E$row", '-', Config::getDefaultStyle(['align' => 'center']));
-			$this->setCellValue("F$row", $game[2], Config::getDefaultStyle());
+			$this->setCellValue("F$row", $gameconnect[2], Config::getDefaultStyle());
 			$this->plan['rueckrunde'][$game[2]]['F'][$row] = $game[1];
 			$this->setCellValue("G$row", "", Config::getInputStyle(['align' => 'center']));
 			$this->setCellValue("H$row", ":", Config::getDefaultStyle(['align' => 'center']));
@@ -122,16 +124,22 @@ extends ExcelHelper
 		$spielplan = $planner->generate(count($teams), $rueckrunde);
 
 		$planTeamname = [];
+		$planTeamnameConnect = [];
 		foreach ($spielplan AS $spiel) {
 			$planTeamname[] = [
 				1 => $teams[$spiel[1]],
 				2 => $teams[$spiel[2]],
+			];
+			$planTeamnameConnect[] = [
+				1 => "=Konfiguration!B".(6 + $spiel[1]),
+				2 => "=Konfiguration!B".(6 + $spiel[2]),
 			];
 		}
 
 		$result = [
 			"plan" => $spielplan,
 			"planteams" => $planTeamname,
+			"planteamsconnect" => $planTeamnameConnect,
 		];
 		$this->games = $result;
 
